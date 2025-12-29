@@ -350,13 +350,13 @@
             <div class="cta-buttons">
                 <a href="projects.html" class="btn btn-primary">View Projects</a>
                 <!-- In index.html, update the download button -->
-<a href="Olorode_Oluwafunmilayo.pdf" 
-   download="Olorode_Oluwafunmilayo.pdf"
-   type="application/pdf"
+<a href="Oluwafunmilayo_Olorode.pdf" 
+   target="_blank"
+   onclick="window.open(this.href, '_blank'); return false;"
    class="btn btn-secondary">
-    Download CV (PDF)
+    View & Download CV
 </a>
-                <a href="contact.html" class="btn btn-outline">Contact Me</a>
+<a href="contact.html" class="btn btn-outline">Contact Me</a>
             </div>
         </div>
     </section>
@@ -453,20 +453,37 @@
             });
         });
 
-        <script>
-// Force proper PDF download
-document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-        // Add timestamp to prevent caching
-        const href = this.getAttribute('href');
-        const timestamp = new Date().getTime();
-        this.setAttribute('href', href + '?v=' + timestamp);
-        
-        // Force download attribute
-        this.setAttribute('download', 'Olorode_Oluwafunmilayo.pdf');
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Find all PDF download links
+    const pdfLinks = document.querySelectorAll('a[href$=".pdf"]');
+    
+    pdfLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const pdfUrl = this.getAttribute('href');
+            const fileName = 'Olorode_Oluwafunmilayo_CV.pdf';
+            
+            // Create temporary download link
+            const tempLink = document.createElement('a');
+            tempLink.href = pdfUrl;
+            tempLink.download = fileName;
+            tempLink.target = '_blank';
+            
+            // Add cache busting
+            tempLink.href = pdfUrl + '?t=' + new Date().getTime();
+            
+            // Trigger download
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+        });
     });
 });
 </script>
+    <script>
+
     </script>
 </body>
 </html>
