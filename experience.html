@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experience | Olorode Oluwafunmilayo</title>
+    <style>
+        /* Shared styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        header {
+            background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo span {
+            background: white;
+            color: #2563EB;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.9;
+            text-decoration: underline;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Experience Page Specific */
+        .page-header {
+            padding: 150px 0 80px;
+            background: linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%2310B981" opacity="0.05"><path d="M20,50 L80,50 M50,20 L50,80"/></svg>');
+        }
+        
+        .page-title {
+            font-size: 3rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: #2563EB;
+            border-radius: 2px;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #475569;
+            font-size: 1.2rem;
+        }
+        
+        .experience-content {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: #e2e8f0;
+        }
+        
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+            width: 50%;
+            padding-right: 3rem;
+        }
+        
+        .timeline-item:nth-child(even) {
+            margin-left: 50%;
+            padding-right: 0;
+            padding-left: 3rem;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            right: -10px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: #2563EB;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px #e2e8f0;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            right: auto;
+            left: -10px;
+        }
+        
+        .experience-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 5px solid #2563EB;
+            transition: transform 0.3s ease;
+        }
+        
+        .timeline-item:nth-child(even) .experience-card {
+            border-left: none;
+            border-right: 5px solid #10B981;
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .experience-title {
+            font-size: 1.4rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .experience-period {
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .experience-company {
+            color: #2563EB;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .experience-description {
+            color: #475569;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .experience-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-badge {
+            background: #e0e7ff;
+            color: #3730a3;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+        
+        .education-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .education-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 10px;
+            border-top: 5px solid #10B981;
+        }
+        
+        .education-degree {
+            font-size: 1.3rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .education-school {
+            color: #2563EB;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-period {
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .certifications-section {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .certification-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .certification-name {
+            color: #1e293b;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .certification-issuer {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #475569;
+            color: #94A3B8;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #2563EB;
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+            .nav-links.active { display: flex; }
+            .timeline:before { left: 20px; }
+            .timeline-item, .timeline-item:nth-child(even) {
+                width: 100%;
+                padding-left: 3rem;
+                padding-right: 0;
+                margin-left: 0;
+            }
+            .timeline-dot {
+                left: 10px;
+                right: auto;
+            }
+            .timeline-item:nth-child(even) .timeline-dot {
+                left: 10px;
+            }
+            .timeline-item:nth-child(even) .experience-card {
+                border-left: 5px solid #10B981;
+                border-right: none;
+            }
+            .page-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <span>OO</span>
+                    Olorode Oluwafunmilayo
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="skills.html">Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="experience.html">Experience</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Experience & Education</h1>
+            <p class="page-subtitle">Professional journey, academic background, and continuous learning path.</p>
+        </div>
+    </section>
+
+    <section class="experience-content">
+        <div class="container">
+            <h2 style="color: #1e293b; text-align: center; margin-bottom: 3rem; font-size: 2rem;">Professional Experience</h2>
+            
+            <div class="timeline">
+                <!-- Experience 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Network Security Intern</h3>
+                            <span class="experience-period">April 2024 – July 2024</span>
+                        </div>
+                        <div class="experience-company">eProcess Consulting Limited</div>
+                        <p class="experience-description">Gained hands-on experience in network security protocols, threat analysis, and cybersecurity best practices. Assisted in monitoring network activities and implementing security measures.</p>
+                        <div class="experience-skills">
+                            <span class="skill-badge">Network Security</span>
+                            <span class="skill-badge">Cybersecurity</span>
+                            <span class="skill-badge">Threat Analysis</span>
+                            <span class="skill-badge">Security Protocols</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Community Initiative Volunteer</h3>
+                            <span class="experience-period">2025</span>
+                        </div>
+                        <div class="experience-company">JTF Initiatives Limited</div>
+                        <p class="experience-description">Contributed to community development programs focusing on youth empowerment, technology education, and social impact initiatives. Coordinated volunteer activities and community outreach.</p>
+                        <div class="experience-skills">
+                            <span class="skill-badge">Community Development</span>
+                            <span class="skill-badge">Volunteer Coordination</span>
+                            <span class="skill-badge">Youth Empowerment</span>
+                            <span class="skill-badge">Social Impact</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">ICT & Computer Support</h3>
+                            <span class="experience-period">2025</span>
+                        </div>
+                        <div class="experience-company">JTF Initiatives Limited</div>
+                        <p class="experience-description">Provided technical support for ICT infrastructure, assisted in digital literacy programs, and maintained computer systems for organizational efficiency and educational programs.</p>
+                        <div class="experience-skills">
+                            <span class="skill-badge">Technical Support</span>
+                            <span class="skill-badge">ICT Infrastructure</span>
+                            <span class="skill-badge">Digital Literacy</span>
+                            <span class="skill-badge">System Maintenance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Tech Project Lead & Collaborator</h3>
+                            <span class="experience-period">2025</span>
+                        </div>
+                        <div class="experience-company">K.O InnoVatech & Co</div>
+                        <p class="experience-description">Led technology education initiatives and collaborative projects focused on innovation and skill development. Coordinated teams and resources for successful project execution.</p>
+                        <div class="experience-skills">
+                            <span class="skill-badge">Project Leadership</span>
+                            <span class="skill-badge">Team Coordination</span>
+                            <span class="skill-badge">Tech Education</span>
+                            <span class="skill-badge">Innovation</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Experience 5 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="experience-card">
+                        <div class="experience-header">
+                            <h3 class="experience-title">Lead Youth Mentor (Technology & Leadership)</h3>
+                            <span class="experience-period">2025</span>
+                        </div>
+                        <div class="experience-company">Various Initiatives</div>
+                        <p class="experience-description">Mentored young people in technology skills, leadership development, and career guidance. Conducted workshops and provided ongoing support for youth development programs.</p>
+                        <div class="experience-skills">
+                            <span class="skill-badge">Youth Mentorship</span>
+                            <span class="skill-badge">Leadership Training</span>
+                            <span class="skill-badge">Workshop Facilitation</span>
+                            <span class="skill-badge">Career Guidance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Education Section -->
+            <div class="education-section">
+                <h2 style="color: #1e293b; text-align: center; margin-bottom: 3rem; font-size: 2rem;">Education</h2>
+                <div class="education-grid">
+                    <div class="education-card">
+                        <h3 class="education-degree">Basic Education Certificate</h3>
+                        <div class="education-school">Oore Ofe Primary School</div>
+                        <div class="education-period">2014 – 2019</div>
+                        <p>Foundation education with focus on core subjects and basic computer literacy.</p>
+                    </div>
+                    
+                    <div class="education-card">
+                        <h3 class="education-degree">Junior Secondary School Certificate (JSCE)</h3>
+                        <div class="education-school">Ifesowapo Junior Secondary School</div>
+                        <div class="education-period">2019 – 2022</div>
+                        <p>Secondary education with emphasis on sciences and technology subjects.</p>
+                    </div>
+                    
+                    <div class="education-card">
+                        <h3 class="education-degree">Technical College Education</h3>
+                        <div class="education-school">Government Technical College, Agidingbi</div>
+                        <div class="education-period">2022 – 2025</div>
+                        <p>Specialized technical education with practical skills in technology and vocational training.</p>
+                    </div>
+                    
+                    <div class="education-card">
+                        <h3 class="education-degree">Continuous Self-Learning</h3>
+                        <div class="education-school">Online & Independent Study</div>
+                        <div class="education-period">Ongoing</div>
+                        <p>Self-directed learning in AI, Web Development, Cybersecurity, and Technology Innovation through online courses, tutorials, and practical projects.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Certifications Section -->
+            <div class="certifications-section">
+                <h2 style="color: #1e293b; text-align: center; margin-bottom: 3rem; font-size: 2rem;">Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-card">
+                        <div class="certification-name">National Technical Certificate (NTC)</div>
+                        <div class="certification-issuer">LASTVEB</div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-name">CE1 — Cryptography</div>
+                        <div class="certification-issuer">Cyber Security Essentials</div>
+                    </div>
+                    
+                    <div class="certification-card">
+                        <div class="certification-name">CE2 — Wireless</div>
+                        <div class="certification-issuer">Cyber Security Essentials</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>Building a career through continuous learning and impactful contributions.</p>
+                <div class="copyright">
+                    <p>&copy; 2024 Olorode Oluwafunmilayo. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+        });
+        
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
