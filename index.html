@@ -452,6 +452,21 @@
                 }
             });
         });
+
+        <script>
+// Force proper PDF download
+document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        // Add timestamp to prevent caching
+        const href = this.getAttribute('href');
+        const timestamp = new Date().getTime();
+        this.setAttribute('href', href + '?v=' + timestamp);
+        
+        // Force download attribute
+        this.setAttribute('download', 'Olorode_Oluwafunmilayo.pdf');
+    });
+});
+</script>
     </script>
 </body>
 </html>
